@@ -32,7 +32,7 @@
         <td><?php echo $rows['center_num']; ?> </td>
         <td><?php echo $rows['division_name']; ?> </td>
         <td>
-          <a href="?student_regs&id=<?php  echo $rows['id'];  ?>&gdgdggd&link=Recording Students Under <?php echo $rows['school_name']; ?> "  class=" btn-primary btn-sm">Register Student</a>
+          <a href="?recording_sessions&id=<?php  echo $rows['id'];  ?>&gdgdggd&link=Recording Supervision Sessions Under <?php echo $rows['school_name']; ?> "  class=" btn-primary btn-sm">Record Supervision Pay per Sessions</a>
          
         </td>
       </tr>

@@ -164,18 +164,57 @@
 										include '../SuperAdmin/Recordings/students_registering.php';
 									}
 
+									if(isset($_GET['record_sessions'])){
+										include '../SuperAdmin/Recordings/record_sessions.php';
+									}
+									if(isset($_GET['recording_sessions'])){
+										include '../SuperAdmin/Recordings/recording_sessions.php';
+									}
+									if(isset($_GET['record_invpay'])){
+										include '../SuperAdmin/Recordings/record_invigilators.php';
+									}
+									if(isset($_GET['recording_invpay'])){
+										include '../SuperAdmin/Recordings/recording_invpay.php';
+									}
+									if(isset($_GET['create_supervisor'])){
+										include '../SuperAdmin/Recordings/create_supervisor.php';
+									}
+
 									////////////////Reports
 
 									if(isset($_GET['materials'])){
 										include '../SuperAdmin/Reports/index.php';
 									}
 									
+									
 									if(isset($_GET['regstud_reports'])){
 										include '../SuperAdmin/Reports/regstud_reports.php';
 									}
 									
+									if(isset($_GET['supervisor_reports'])){
+										include '../SuperAdmin/Reports/supervisor_reports.php';
+									}
+									if(isset($_GET['inv_reports'])){
+										include '../SuperAdmin/Reports/inv_reports.php';
+									}
+									if(isset($_GET['inv_payrep'])){
+										include '../SuperAdmin/Reports/inv_payrep.php';
+									}
 									
-									
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 									
 									if(isset($_GET['reset_password'])){
 										include '../SuperAdmin/Settings/reset_password.php';

@@ -2,7 +2,7 @@
 <div class="clearfix">
   <div class="pull-right tableTools-container"></div>
 </div>
-<div class="table-header"> All Schools </div>
+<div class="table-header"> All Subjects Pay Rates </div>
 <!-- div.table-responsive -->
 <!-- div.dataTables_borderWrap -->
 <div>
@@ -12,27 +12,31 @@
         <th class="center"> <label class="pos-rel">
          S/N
         </th>
-        <th>School Name</th>
-        <th>Center Number</th>
-        <th>Division</th>
+        <th>Subject</th>
+        <th>Subject Code</th>
+        <th>Payment Rates</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <?php
                                               
-        $a = $con->query("SELECT * from divisions,schools WHERE divisions.id=schools.subdiv_id 
-		  order by school_name ") or die(mysqli_error($con));
+        $a = $con->query("SELECT * from subjects order by subject_name ") or die(mysqli_error($con));
           $i=1;      
         while($rows = $a->fetch_assoc()) {
         ?>
       <tr>
         <td class="center"><?PHP echo $i++; ?>  </td>
-        <td><?php echo $rows['school_name']; ?> </td>
-        <td><?php echo $rows['center_num']; ?> </td>
-        <td><?php echo $rows['division_name']; ?> </td>
-        <td>
-          <a href="?student_regs&id=<?php  echo $rows['id'];  ?>&gdgdggd&link=Recording Students Under <?php echo $rows['school_name']; ?> "  class=" btn-primary btn-sm">Register Student</a>
+        <td><?php echo $rows['subject_name']; ?> </td>
+        <td><?php echo $rows['subject_code']; ?> </td>
+        <td><?php  $select = $con->query("SELECT inv_cost from student_registration WHERE subject_id='".$rows['id']."' 
+        AND year_id='$year_id ' order by id desc limit 1 ") or die(mysqli_error($con));
+              
+        while($row = $select->fetch_assoc()) {
+            echo number_format($row['inv_cost']);
+         } ?> </td>
+        <td> 
+          <a href="?recording_invpay&id=<?php  echo $rows['id'];  ?>&year_id=<?php echo $year_id;  ?>&gdgdggd&link=Recording Invigliators Rate for  <?php echo $rows['subject_name']; ?> this <?php  echo $cur_ayear; ?>"  class=" btn-primary btn-sm">Invigilators Pay in  <?php  echo $cur_ayear; ?>  </a>
          
         </td>
       </tr>

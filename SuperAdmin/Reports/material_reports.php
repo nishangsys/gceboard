@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../../assets/css/jquery-ui.min.css"/>
     <style>
         body{
-            
+          background:#fff;   
         }
               table, th, td {
               border: 1px solid black;
@@ -23,23 +23,74 @@
               }
               th, td {
               padding: 5px;
-              text-align: left;    
+              text-align: center;    
               }
 
-              .top_row {
-              display: table;
-              width: 100%;
-              padding: 10px 0px;
-              
+               /* Fixed Headers */
+
+               th {
+                position: -webkit-sticky;
+                position: sticky;
+                top: 0;
+                z-index: 2;
+                }
+                  
+
+                        th[scope=row] {
+                position: -webkit-sticky;
+                position: sticky;
+                left: 0;
+                z-index: 1;
+                }
+
+                th[scope=row] {
+                vertical-align: top;
+                color: inherit;
+                background-color: inherit;
+                line-height:2;
+                background: linear-gradient(90deg, transparent 0%, transparent calc(100% - .05em), #d6d6d6 calc(100% - .05em), #d6d6d6 100%);
+                }
+
+                table:nth-of-type(2) th:not([scope=row]):first-child {
+                left: 0;
+                z-index: 3;
+                background: linear-gradient(90deg, #666 0%, #666 calc(100% - .05em), #ccc calc(100% - .05em), #ccc 100%);
+                }
+
+                /* Strictly for making the scrolling happen. */
+
+                th[scope=row] + td {
+                min-width: 24em;
+                line-height:2;
+                }
+
+                th[scope=row] {
+                min-width: 20em;
+                line-height:2;
+                }
+                /* Fixed Headers */
+
+                th {
+                position: -webkit-sticky;
+                position: sticky;
+                top: 0;
+                z-index: 2;
+                clear:both;
+                }
+                .headings{
+                  font-weight:bold;
+                  font-family: 'Arial Black', Gadget, sans-serif;
+                }
+                .rotate
+              {
+                  
+                  -webkit-transform: rotate(-90deg); 
+                  clear:both;
+                  line-height:1.5;
+                  -moz-transform: rotate(-90deg); 
+                  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); //For IE support
               }
 
-              .top_row > div {
-              display: table-cell;
-              border-collapse:collapse;
-              width:100%;
-              border: 1px solid #000;
-              margin-top:0px;
-              }
 
 
     </style>
@@ -84,9 +135,9 @@
 
     <!---speciality code starts--->
 
-    <tr>
+    <tr class="headings">
         
-        <th colspan="7">ACC CENTRE</th>
+        <td colspan="7">ACC CENTRE</td>
        
        <?php
        
@@ -94,11 +145,11 @@
        or die(mysqli_error($con));
        while($row=$check->fetch_assoc()){
         ?>
-        <th style="font-size:9px"><?php  echo $row['abbv']         ?></th>
+        <td style="font-size:9px"><?php  echo $row['abbv']         ?></td>
         <?php } ?>
-        <th></th>
-        <th></th>
-        <th></th> 
+        <td></td>
+        <td></td>
+        <td></td> 
       </tr>
       <!---speciality code ends--->
 
@@ -128,26 +179,47 @@
 
 
       <!---Rate per subject starts--->
-      <tr>        
-        <th colspan="6"></th>
+      <tr class="headings">        
+        <td colspan="6"></td>
          
-        <th style="font-size:10px">Rate/Cand.</th>
+        <td style="font-size:10px">Rate/Cand.</td>
        <?php
        
        $check=$con->query("SELECT * FROM  subjects,specialities WHERE specialities.id=subjects.	specailty_id  order by subjects.subject_code ") 
        or die(mysqli_error($con));
        while($row=$check->fetch_assoc()){
         ?>
-        <th style="font-size:10px"><?php  echo $row['rate_per_student']         ?></th>
+        <td style="font-size:10px"><?php  echo $row['rate_per_student']         ?></td>
         <?php } ?>  
-        <th >Total</th>
-        <th >Tax<br>
+        <td >Total</td>
+        <td >Tax<br>
       <?php echo $tax_rate; ?> % 
-      </th>
-        <th >Net<br>Payable</th>
+      </td>
+        <td >Net<br>Payable</td>
 
       </tr>
         <!---Rate per subject ends--->
+
+
+          
+      <tr class="headings" >
+        
+        <td> </td>
+        
+        <td colspan="6"> </td>
+       
+       <?php
+       
+       $check=$con->query("SELECT * FROM  subjects,specialities WHERE specialities.id=subjects.	specailty_id  order by subjects.subject_code ") 
+       or die(mysqli_error($con));
+       while($row=$check->fetch_assoc()){
+        ?>
+        <td style="font-size:9px" class="rotate"><?php  echo $row['subject_name']         ?></td>
+        <?php } ?>
+        <td>Total</td> 
+        
+      </tr>
+      <!---subject code ends--->
 
 
       
@@ -434,7 +506,7 @@
        <!-----GET ALL REGIONS TOTAL RECORDS FOR ALL SUBJETS------------->
 
 
-      <tr style="background:#F4A460">
+      <tr style="background:#F4A460" class="headings">
 
                   <td colspan="6">Total <?php echo $rows['region']; ?></td>
                   <td>
@@ -450,7 +522,7 @@
                 while($row=$check->fetch_assoc()){
 
                 ?>
-                <th><?php
+                <td><?php
 
                 $check_students=$con->query("SELECT SUM(num_ofstudents) as num_ofstudents,student_registration.cost_price as cp 
                  FROM  regions,divisions,schools,student_registration 
@@ -478,14 +550,14 @@
 
                 ?>
                       
-                </th>
+                </td>
                
                 <?php } ?> 
                
                 
 
                  <!------TOTAL NUMBER & COST PER REGION------------->
-                 <th><?php
+                 <td><?php
  
                             $check_students=$con->query("SELECT SUM(num_ofstudents) as num_ofstudents,student_registration.cost_price as cp 
                             FROM  schools,divisions, regions,student_registration 
@@ -533,15 +605,15 @@
 
 
 
-                            ?></th>
-                            <th><?php
+                            ?></td>
+                            <td><?php
                             $tax_region=$total_div*$tax_per;
-                             echo number_format($tax_region); ?></th>
-                             <th><?php 
+                             echo number_format($tax_region); ?></td>
+                             <td><?php 
                              $net_at_region=$total_cost_per_subdiv-$tax_region;
                              echo number_format($net_at_region);
                              
-                             ?></th>
+                             ?></td>
                             <!--------------End total Cost per Sub Divsion------------>
                               
                                     
@@ -565,7 +637,7 @@
 
 
 
-         <tr style="background:#FF0">
+         <tr style="background:#FF0" class="headings">
 
             <td colspan="6">GRAND TOTAL</td>
             <td>
@@ -581,7 +653,7 @@
                 while($row=$check->fetch_assoc()){
 
                 ?>
-                <th><?php
+                <td><?php
 
                 $check_students=$con->query("SELECT SUM(num_ofstudents) as num_ofstudents,student_registration.cost_price as cp 
                  FROM  regions,divisions,schools,student_registration 
@@ -609,14 +681,14 @@
 
                 ?>
                       
-                </th>
+                </td>
                
                 <?php } ?> 
                
                 
 
                  <!------TOTAL NUMBER & COST PER REGION------------->
-                 <th><?php
+                 <td><?php
  
                             $check_students=$con->query("SELECT SUM(num_ofstudents) as num_ofstudents,student_registration.cost_price as cp 
                             FROM  schools,divisions, regions,student_registration 
@@ -664,15 +736,15 @@
 
 
 
-                            ?></th>
-                            <th><?php
+                            ?></td>
+                            <td><?php
                             $tax_region=$total_div*$tax_per;
-                             echo number_format($tax_region); ?></th>
-                             <th><?php 
+                             echo number_format($tax_region); ?></td>
+                             <td><?php 
                              $net_at_region=$total_cost_per_subdiv-$tax_region;
                              echo number_format($net_at_region);
                              
-                             ?></th>
+                             ?></td>
                             <!--------------End total Cost per Sub Divsion------------>
                               
                                     

@@ -1,8 +1,76 @@
+<?PHP 
+						CreateSupervisor();
+						UpdateSupervisor($_GET['edit']);
+						$select =$con->query("SELECT * FROM  divisions  WHERE id='".$_GET['id']."' ") or die(mysqli_error($con));
+                        				
+                          while($rows=$select->fetch_assoc()){
+                           $divsion_name=$rows['division_name'];
+                          }
+						
+						if(isset($_GET['edit'])){
+							$sub_divname="";
+							$subdiv_id="";
+							$select =$con->query("SELECT * FROM  supervisors where id='".$_GET['edit']."'  ") or die(mysqli_error($con));
+							
+							while($rows=$select->fetch_assoc()){
+								$name=$rows['name'];
+								$address=$rows['addr'];
+                            }
+						}
+							
+						
+						?>
+						<form method="POST" action="" class="form-horizontal" role="form">
+
+					       	<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"  autocomplete="off" for="form-field-1"> SuperVisor Name: </label>
+
+										<div class="col-sm-9">
+											<input type="text" value="<?php echo $name; ?>" name="name" required   id="form-field-1"   class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"  autocomplete="off" for="form-field-1"> Address: </label>
+
+										<div class="col-sm-9">
+											<input type="text" value="<?php echo $address; ?>" name="addr" required   id="form-field-1"   class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+
+
+                                    
+                                    
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											
+                                            <?php if(isset($_GET['edit'])){ ?>
+                                            <input type="hidden" name="id"  value="<?php echo $_GET['edit']; ?>" />
+                                            <button class="btn btn-info" type="submit" name="save_update">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												Save Updates
+											</button>
+											</div>
+                                            </div>
+                                            <?php  } else { ?>
+                                            <button class="btn btn-info" type="submit" name="save">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												Submit
+											</button>
+												
+
+											
+										</div>
+									</div>
+                        </form>
+                        <?php  }?>
+
+
 
 <div class="clearfix">
   <div class="pull-right tableTools-container"></div>
 </div>
-<div class="table-header"> All Schools </div>
+<div class="table-header"> All Supervisors </div>
 <!-- div.table-responsive -->
 <!-- div.dataTables_borderWrap -->
 <div>
@@ -10,29 +78,31 @@
     <thead>
       <tr>
         <th class="center"> <label class="pos-rel">
-         S/N
+          <input type="checkbox" class="ace" />
+          <span class="lbl"></span> </label>
         </th>
-        <th>School Name</th>
-        <th>Center Number</th>
-        <th>Division</th>
+        <th>Name</th>
+        <th>Address</th>
+       
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <?php
                                               
-        $a = $con->query("SELECT * from divisions,schools WHERE divisions.id=schools.subdiv_id 
-		  order by school_name ") or die(mysqli_error($con));
+        $a = $con->query("SELECT * from  supervisors order by name ") or die(mysqli_error($con));
           $i=1;      
         while($rows = $a->fetch_assoc()) {
         ?>
       <tr>
-        <td class="center"><?PHP echo $i++; ?>  </td>
-        <td><?php echo $rows['school_name']; ?> </td>
-        <td><?php echo $rows['center_num']; ?> </td>
-        <td><?php echo $rows['division_name']; ?> </td>
+        <td class="center"><label class="pos-rel">
+          <?php echo $i++; ?>
+        </td>
+        <td><?php echo $rows['name']; ?> </td>
+        <td><?php echo $rows['addr']; ?> </td>
+        
         <td>
-          <a href="?student_regs&id=<?php  echo $rows['id'];  ?>&gdgdggd&link=Recording Students Under <?php echo $rows['school_name']; ?> "  class=" btn-primary btn-sm">Register Student</a>
+          <a href="?create_supervisor&edit=<?php  echo $rows['id'];  ?>&gdgdggd&link=Editting Supervsior  <?php echo $rows['name']; ?> "  class=" btn-primary btn-sm">Edit</a>
          
         </td>
       </tr>
@@ -90,7 +160,7 @@
 					bAutoWidth: false,
 					"aoColumns": [
 					  { "bSortable": false },
-					  null,null, null,    
+					  null,  null,  
 					  { "bSortable": false }
 					],
 					"aaSorting": [],

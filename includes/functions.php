@@ -457,7 +457,128 @@
 		while($row_schools=$get_schools_inreg->fetch_assoc()){
 		}
 	}
+			
+	
+	function RegisterSessions($sid,$year_id){
+		$con= dbcon();
+			if(isset($_POST['save'])){
+		
+			$subject_id=$_POST['subject_id'];
+			$num=$_POST['sess'];
+			$acc_center=$_POST['acc_center'];
+			$transport=$_POST['transport'];
 					 
+		
+			
+			
+		$select =$con->query("SELECT * FROM student_registration WHERE  school_id='$sid' AND 
+		year_id='$year_id' AND subject_id='$subject_id'  ") or die(mysqli_error($con));	
+		 $counts=$select->num_rows;	
+		if($counts>0){
+			$query =$con->query("UPDATE student_registration  set sess_num='$num',address_id='$acc_center' WHERE  school_id='$sid' AND 
+			 year_id='$year_id' AND subject_id='$subject_id'
+		 ") or die(mysqli_error($con));
+			echo '<meta http-equiv="Refresh" content="0; url=?recording_sessions&id='.$sid.'&gdgdggd&link='.$_GET['link'].'">';
+		}
+		else {
+		$query =$con->query("INSERT INTO student_registration  set school_id='$sid', year_id='$year_id',subject_id='$subject_id'
+		,sess_num='$num',address_id='$acc_center' ,transport='$transport' ") or die(mysqli_error($con));
+			echo '<meta http-equiv="Refresh" content="0; url=?recording_sessions&id='.$sid.'&gdgdggd&link='.$_GET['link'].'">';
+	}
+		}
+	}
+
+	function DelSessions($sid){
+			
+		
+		$con= dbcon();
+		if(isset($_GET['del'])){	
+			$id=$_GET['del'];			
+			
+			$query =$con->query("DELETE FROM student_registration   WHERE id='$id'  ") or die(mysqli_error($con));
+			echo "<script>alert(' Successfully Deleted!')</script>";	 
+			echo '<meta http-equiv="Refresh" content="0; url=?recording_sessions&id='.$sid.'&gdgdggd&link='.$_GET['link'].'">';
+			}
+	}
+
+	
+	function UpdateSessions($sid,$id){
+		$con= dbcon();
+			if(isset($_POST['save_update'])){
+		
+			$subject_id=$_POST['subject_id'];
+			$num=$_POST['sess'];
+			$acc_center=$_POST['acc_center'];
+			$transport=$_POST['transport'];
+					 
+		
+			$query =$con->query("UPDATE student_registration  set sess_num='$num',address_id='$acc_center',transport='$transport'
+			 WHERE    id='$id'
+		 ") or die(mysqli_error($con));
+		 echo "<script>alert('Update Successfull')</script>";
+			echo '<meta http-equiv="Refresh" content="0; url=?recording_sessions&id='.$sid.'&gdgdggd&link='.$_GET['link'].'">';
+		
+		}
+	}
+
+	function UpdateInvPay($sid,$year){
+		$con= dbcon();
+			if(isset($_POST['save'])){
+		
+			$subject_id=$_POST['subject_id'];
+			$num=$_POST['cost'];
+			 	 
+		
+			$query =$con->query("UPDATE student_registration  set inv_cost='$num' 	 WHERE    subject_id='$sid'
+			AND year_id='$year'
+		 ") or die(mysqli_error($con));
+		 echo "<script>alert('Update Successfull')</script>";
+		
+			echo '<meta http-equiv="Refresh" content="0; url= ?recording_invpay&year_id='.$year.'&id='.$sid.'&gdgdggd&link='.$_GET['link'].'">';
+		
+		}
+	}
+
+
+	function CreateSupervisor(){
+		$con= dbcon();
+			if(isset($_POST['save'])){
+		
+			$name=$_POST['name'];
+			$addr=$_POST['addr'];
+			
+			
+			
+		$select =$con->query("SELECT * FROM supervisors WHERE  name='$name' ") or die(mysqli_error($con));	
+		 $counts=$select->num_rows;	
+		if($counts>0){
+			echo "<script>alert('".$name." Already Exists ')</script>";
+			echo '<meta http-equiv="Refresh" content="0; url=?create_supervisor&gdgdggd&link='.$_GET['link'].'">';
+		}
+		else {
+		$query =$con->query("INSERT INTO supervisors  set name='$name',addr='$addr' ") or die(mysqli_error($con));
+			echo '<meta http-equiv="Refresh" content="0; url=?create_supervisor&gdgdggd&link='.$_GET['link'].'">';
+	}
+		}
+	}
+
+	function UpdateSupervisor($id){
+		$con= dbcon();
+			if(isset($_POST['save_update'])){
+		
+			$name=$_POST['name'];
+			$addr=$_POST['addr'];
+			
+			
+		
+		$query =$con->query("UPDATE supervisors  set name='$name',addr='$addr' WHERE id='$id' ") or die(mysqli_error($con));
+		echo "<script>alert('Update Successfull ')</script>";
+			echo '<meta http-equiv="Refresh" content="0; url=?create_supervisor&gdgdggd&link='.$_GET['link'].'">';
+	
+		}
+	}
+
+
 			
 
 		

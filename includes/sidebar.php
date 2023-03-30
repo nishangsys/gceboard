@@ -150,15 +150,6 @@
 						<ul class="submenu">
 							
 							<li class="">
-								<a href="?rec_student&link=Record Materials">
-									<i class="menu-icon fa fa-home"></i>
-									Record Materials
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="">
 								<a href="?register_students&link=Record Registering Students">
 									<i class="menu-icon fa fa-home"></i>
 									Registered Students
@@ -166,6 +157,25 @@
 
 								<b class="arrow"></b>
 							</li>
+
+							<li class="">
+								<a href="?record_sessions&link=Supervision Pay">
+									<i class="menu-icon fa fa-home"></i>
+									Supervision Pay
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="?record_invpay&link=Record Invigilators Pay">
+									<i class="menu-icon fa fa-home"></i>
+									Invigilators Pay
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+
 							<!--
 
 							<li class="">
@@ -213,6 +223,17 @@
 						<ul class="submenu">
 
 						<li class="">
+								<a href="?create_supervisor&link=Create Supervisiors">
+									<i class="menu-icon fa fa-home"></i>
+								Create	Supervisors 
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+
+
+						<li class="">
 								<a href="?materials&link=Materials Reports">
 									<i class="menu-icon fa fa-home"></i>
 									Materials
@@ -238,6 +259,39 @@
 
 								<b class="arrow"></b>
 							</li>
+
+							<!--
+							<li class="">
+								<a href="?supervisor_reports&link=Supervisors Pay Reports">
+									<i class="menu-icon fa fa-home"></i>
+									Supervisors Pay
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							---->
+
+							<li class="">
+								<a href="?inv_reports&link=Supervisors Pay Reports">
+									<i class="menu-icon fa fa-home"></i>
+									Supervisors Pay
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="?inv_payrep&link=Invigilators Pay Reports">
+									<i class="menu-icon fa fa-home"></i>
+									Invigilators Pay
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+
+
 
 
 

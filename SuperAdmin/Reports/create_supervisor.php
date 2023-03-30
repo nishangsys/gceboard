@@ -2,7 +2,7 @@
 <div class="clearfix">
   <div class="pull-right tableTools-container"></div>
 </div>
-<div class="table-header"> All Schools </div>
+<div class="table-header"> All Sub Divisions </div>
 <!-- div.table-responsive -->
 <!-- div.dataTables_borderWrap -->
 <div>
@@ -10,29 +10,32 @@
     <thead>
       <tr>
         <th class="center"> <label class="pos-rel">
-         S/N
+          <input type="checkbox" class="ace" />
+          <span class="lbl"></span> </label>
         </th>
-        <th>School Name</th>
-        <th>Center Number</th>
-        <th>Division</th>
+        <th>Divison</th>
+        
+       
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <?php
                                               
-        $a = $con->query("SELECT * from divisions,schools WHERE divisions.id=schools.subdiv_id 
-		  order by school_name ") or die(mysqli_error($con));
-          $i=1;      
+        $a = $con->query("SELECT * from  divisions order by division_name ") or die(mysqli_error($con));
+                
         while($rows = $a->fetch_assoc()) {
         ?>
       <tr>
-        <td class="center"><?PHP echo $i++; ?>  </td>
-        <td><?php echo $rows['school_name']; ?> </td>
-        <td><?php echo $rows['center_num']; ?> </td>
+        <td class="center"><label class="pos-rel">
+          <input type="checkbox" class="ace" />
+          <span class="lbl"></span> </label>
+        </td>
         <td><?php echo $rows['division_name']; ?> </td>
+         
+        
         <td>
-          <a href="?student_regs&id=<?php  echo $rows['id'];  ?>&gdgdggd&link=Recording Students Under <?php echo $rows['school_name']; ?> "  class=" btn-primary btn-sm">Register Student</a>
+          <a href="?creating_acoomo_center&id=<?php  echo $rows['id'];  ?>&gdgdggd&link=Creating Schools under <?php echo $rows['division_name']; ?> "  class=" btn-primary btn-sm">Create a School</a>
          
         </td>
       </tr>
@@ -90,7 +93,7 @@
 					bAutoWidth: false,
 					"aoColumns": [
 					  { "bSortable": false },
-					  null,null, null,    
+					  null,  
 					  { "bSortable": false }
 					],
 					"aaSorting": [],
