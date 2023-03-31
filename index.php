@@ -144,23 +144,7 @@ $msg="";
 											
 										</div><!-- /.widget-main -->
 
-										<div class="toolbar clearfix" style="background:#f00">
 										
-
-											<div >
-												<a href="register.php"   class="user-signup-link" style="font-size:18px; font-weight:bold; color:#ff0">
-													I want to register
-													<i class="ace-icon fa fa-arrow-right"></i>
-												</a>
-											</div>
-
-											<div >
-												<a href="forgot.php"   class="user-signup-link" style="font-size:18px; font-weight:bold; color:#ff0">
-													Forget Password?
-													
-												</a>
-											</div>
-										</div>
 									</div><!-- /.widget-body -->
 								</div><!-- /.login-box -->
 
